@@ -1,30 +1,827 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>موسوعة الفضاء - EXPLORE SPACE</title>
-<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
-<style>
-:root{--bg:#050812;--card:#10152B;--card2:#151B35;--accent:#7C5CFF;--blue:#3DD6FF;--text:#A8AFC4}
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--bg);color:#fff;font-family:'Tajawal',sans-serif}
-nav{position:fixed;top:0;width:100%;padding:16px 6%;display:flex;justify-content:space-between;align-items:center;background:rgba(5,8,18,0.85);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.06);z-index:100}
-.logo{font-weight:900;letter-spacing:1px}
-.hero{margin-top:60px;padding:60px 6% 40px;display:grid;grid-template-columns:1.1fr 0.9fr;gap:40px;align-items:center;min-height:85vh}
-.hero h1{font-size:72px;font-weight:900;line-height:0.9}
-.hero h1 span{background:linear-gradient(90deg,#fff,#3DD6FF);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="موسوعة الفضاء: اكتشف الكواكب والسدم النجمية والثقوب السوداء والتلسكوبات الفضائية.">
+  <title>موسوعة الفضاء | استكشف الكون</title>
+
+  <style>
+    :root {
+      --background: #050b19;
+      --surface: #0d1830;
+      --surface-light: #142442;
+      --blue: #438cff;
+      --cyan: #65d9ff;
+      --white: #f5f8ff;
+      --muted: #b5c3dc;
+      --border: rgba(255,255,255,.12);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Tahoma, Arial, sans-serif;
+      background: var(--background);
+      color: var(--white);
+      line-height: 1.9;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .stars {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 15% 20%, #ffffff88 1px, transparent 2px),
+        radial-gradient(circle at 80% 35%, #70caff88 1px, transparent 2px),
+        radial-gradient(circle at 45% 70%, #ffffff66 1px, transparent 2px),
+        radial-gradient(circle at 90% 85%, #ffffff66 1px, transparent 2px);
+      background-size: 180px 180px, 230px 230px,
+                       150px 150px, 260px 260px;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(5, 11, 25, .92);
+      backdrop-filter: blur(15px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .navbar {
+      max-width: 1200px;
+      margin: auto;
+      padding: 15px 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: bold;
+      color: var(--cyan);
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      flex-wrap: wrap;
+      font-size: 13px;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      transition: .25s;
+    }
+
+    .nav-links a:hover {
+      color: var(--cyan);
+    }
+
+    .hero {
+      min-height: 620px;
+      max-width: 1200px;
+      margin: auto;
+      padding: 80px 25px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .hero-text .tag {
+      display: inline-block;
+      color: var(--cyan);
+      background: #438cff20;
+      border: 1px solid #438cff55;
+      padding: 5px 14px;
+      border-radius: 30px;
+      margin-bottom: 20px;
+      font-size: 13px;
+    }
+
+    h1 {
+      font-size: clamp(35px, 5vw, 62px);
+      line-height: 1.4;
+      margin-bottom: 18px;
+    }
+
+    .highlight {
+      color: var(--cyan);
+    }
+
+    .hero-text p {
+      color: var(--muted);
+      max-width: 520px;
+      font-size: 16px;
+      margin-bottom: 28px;
+    }
+
+    .button {
+      display: inline-block;
+      background: linear-gradient(135deg, #438cff, #2464d9);
+      color: white;
+      padding: 12px 25px;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: .25s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px #438cff44;
+    }
+
+    .hero-image {
+      min-height: 380px;
+      border-radius: 24px;
+      background:
+        linear-gradient(0deg, #050b19aa, transparent 65%),
+        url("https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=1200&q=85")
+        center / cover;
+      box-shadow: 0 20px 80px #0008;
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-image::after {
+      content: "EXPLORE THE UNIVERSE";
+      position: absolute;
+      bottom: 25px;
+      left: 20px;
+      right: 20px;
+      text-align: center;
+      direction: ltr;
+      font-size: 20px;
+      letter-spacing: 4px;
+      font-weight: bold;
+      color: white;
+      text-shadow: 0 2px 10px #000;
+    }
+
+    section {
+      max-width: 1200px;
+      margin: auto;
+      padding: 75px 25px;
+      scroll-margin-top: 75px;
+    }
+
+    .section-heading {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .section-heading span {
+      color: var(--cyan);
+      font-size: 13px;
+    }
+
+    .section-heading h2 {
+      font-size: clamp(25px, 4vw, 38px);
+      margin: 8px 0;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      max-width: 650px;
+      margin: auto;
+      font-size: 14px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .card {
+      background: linear-gradient(145deg, var(--surface), #091226);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      overflow: hidden;
+      transition: .3s;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: #438cff88;
+    }
+
+    .card img {
+      display: block;
+      width: 100%;
+      height: 205px;
+      object-fit: cover;
+      background: var(--surface-light);
+    }
+
+    .card-content {
+      padding: 22px;
+    }
+
+    .card h3 {
+      font-size: 20px;
+      margin-bottom: 10px;
+      color: var(--white);
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .read-more {
+      display: inline-block;
+      margin-top: 15px;
+      color: var(--cyan);
+      font-size: 13px;
+    }
+
+    .article-list {
+      display: grid;
+      gap: 20px;
+    }
+
+    .article {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 25px;
+      padding: 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      align-items: center;
+    }
+
+    .article img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .article h3 {
+      font-size: 22px;
+      margin-bottom: 8px;
+      color: var(--cyan);
+    }
+
+    .article p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .planet-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .planet {
+      text-align: center;
+      padding: 20px 12px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      transition: .25s;
+    }
+
+    .planet:hover {
+      transform: translateY(-5px);
+      border-color: var(--cyan);
+    }
+
+    .planet img {
+      width: 125px;
+      height: 125px;
+      max-width: 100%;
+      object-fit: contain;
+      border-radius: 50%;
+      margin-bottom: 10px;
+    }
+
+    .planet h3 {
+      font-size: 18px;
+      margin-bottom: 7px;
+    }
+
+    .planet p {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .facts {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .fact {
+      padding: 22px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--surface);
+    }
+
+    .fact h3 {
+      color: var(--cyan);
+      margin-bottom: 8px;
+    }
+
+    .fact p {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .banner {
+      max-width: 1150px;
+      margin: 30px auto;
+      padding: 55px 25px;
+      text-align: center;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background:
+        linear-gradient(0deg, #071125ed, #071125b5),
+        url("https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=1400&q=85")
+        center / cover;
+    }
+
+    .banner h2 {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .banner p {
+      color: #d0ddf2;
+      margin-bottom: 20px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 20px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 13px;
+      background: #040916;
+    }
+
+    .back-top {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--blue);
+      color: white;
+      font-size: 22px;
+      z-index: 50;
+    }
+
+    @media (max-width: 850px) {
+      .hero {
+        grid-template-columns: 1fr;
+        min-height: auto;
+        padding-top: 55px;
+      }
+
+      .hero-image {
+        min-height: 300px;
+      }
+
+      .cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .planet-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .nav-links {
+        gap: 12px;
+      }
+
+      .article {
+        grid-template-columns: 180px 1fr;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .navbar {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .nav-links {
+        width: 100%;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 5px;
+        white-space: nowrap;
+      }
+
+      .hero {
+        padding: 45px 18px;
+      }
+
+      section {
+        padding: 55px 18px;
+      }
+
+      .cards,
+      .facts {
+        grid-template-columns: 1fr;
+      }
+
+      .article {
+        grid-template-columns: 1fr;
+      }
+
+      .article img {
+        height: 210px;
+      }
+
+      .planet-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .banner {
+        margin: 15px;
+      }
+    }
+  </style>
 </head>
+
 <body>
-<nav>
-<div class="logo">🌌 EXPLORE SPACE</div>
-</nav>
-<section class="hero">
-<div>
-<h1>موسوعة <span>الفضاء</span></h1>
-<p style="margin-top:20px; color:var(--text); font-size:18px;">بوابتكِ لاستكشاف أسرار الكون والمجرات والثقوب السوداء.</p>
-</div>
-</section>
+  <div class="stars"></div>
+
+  <header>
+    <nav class="navbar">
+      <a href="#home" class="logo">✦ موسوعة الفضاء</a>
+
+      <div class="nav-links">
+        <a href="#home">الرئيسية</a>
+        <a href="#discover">استكشاف الفضاء</a>
+        <a href="#nebulae">السدم النجمية</a>
+        <a href="#black-holes">الثقوب السوداء</a>
+        <a href="#planets">الكواكب</a>
+        <a href="#telescopes">التلسكوبات</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <div class="hero" id="home">
+      <div class="hero-text">
+        <span class="tag">رحلتك إلى أعماق الكون</span>
+
+        <h1>
+          استكشف أسرار<br>
+          <span class="highlight">الفضاء الواسع</span>
+        </h1>
+
+        <p>
+          مرحبًا بك في موسوعة الفضاء، حيث نأخذك في رحلة
+          لاستكشاف أسرار الكواكب والنجوم والمجرات، والتعرّف
+          على أبرز الظواهر الكونية والحقائق العلمية التي تكشف
+          لنا عظمة الكون واتساعه.
+        </p>
+
+        <a class="button" href="#discover">ابدأ الاستكشاف ←</a>
+      </div>
+
+      <div class="hero-image" role="img" aria-label="مشهد للفضاء والكواكب"></div>
+    </div>
+
+    <section id="discover">
+      <div class="section-heading">
+        <span>اكتشف المجهول</span>
+        <h2>استكشاف الفضاء</h2>
+        <p>
+          تعرّف على أهم الموضوعات والظواهر التي تساعدنا على فهم الكون.
+        </p>
+      </div>
+
+      <div class="cards">
+        <article class="card" id="nebulae">
+          <img
+            src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=900&q=80"
+            alt="سديم نجمي"
+            loading="lazy"
+          >
+          <div class="card-content">
+            <h3>السدم النجمية</h3>
+            <p>
+              السدم سحب ضخمة من الغاز والغبار الكوني، وتُعد من
+              المناطق المهمة في دراسة نشأة النجوم وتطورها.
+            </p>
+            <a href="#nebula-details" class="read-more">اقرأ المزيد ←</a>
+          </div>
+        </article>
+
+        <article class="card" id="black-holes">
+          <img
+            src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=900&q=80"
+            alt="تصور فني للفضاء"
+            loading="lazy"
+          >
+          <div class="card-content">
+            <h3>الثقوب السوداء</h3>
+            <p>
+              مناطق في الفضاء تكون جاذبيتها شديدة للغاية،
+              بحيث لا يستطيع الضوء الإفلات منها بعد تجاوز أفق الحدث.
+            </p>
+            <a href="#black-hole-details" class="read-more">اقرأ المزيد ←</a>
+          </div>
+        </article>
+
+        <article class="card" id="telescopes">
+          <img
+            src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=900&q=80"
+            alt="الكون والنجوم"
+            loading="lazy"
+          >
+          <div class="card-content">
+            <h3>التلسكوبات الفضائية</h3>
+            <p>
+              تساعد التلسكوبات الفضائية العلماء على رصد الأجرام
+              السماوية ودراسة المجرات والنجوم البعيدة.
+            </p>
+            <a href="#telescope-details" class="read-more">اقرأ المزيد ←</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="nebula-details">
+      <div class="section-heading">
+        <span>أسرار الكون</span>
+        <h2>السدم النجمية</h2>
+        <p>رحلة إلى السحب الكونية التي تكشف لنا مراحل تشكّل النجوم.</p>
+      </div>
+
+      <div class="article">
+        <img
+          src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=900&q=80"
+          alt="السدم في الفضاء"
+          loading="lazy"
+        >
+        <div>
+          <h3>ما هي السدم النجمية؟</h3>
+          <p>
+            السديم تجمع واسع من الغاز والغبار في الفضاء.
+            تحتوي بعض السدم على مناطق تتكاثف فيها المادة
+            بفعل الجاذبية، وقد تتشكل داخلها نجوم جديدة.
+            وتختلف السدم في أشكالها وألوانها وأحجامها.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="black-hole-details">
+      <div class="section-heading">
+        <span>ظواهر كونية</span>
+        <h2>الثقوب السوداء</h2>
+        <p>من أكثر الأجرام الكونية إثارة للاهتمام والدراسة.</p>
+      </div>
+
+      <div class="article">
+        <img
+          src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=900&q=80"
+          alt="الفضاء العميق"
+          loading="lazy"
+        >
+        <div>
+          <h3>كيف تعمل الثقوب السوداء؟</h3>
+          <p>
+            يتكوّن الثقب الأسود عندما تتركز كتلة كبيرة في منطقة
+            صغيرة جدًا، فتكون الجاذبية فيها شديدة للغاية.
+            وتُسمى الحدود التي لا يمكن بعدها الإفلات من جاذبيته
+            أفق الحدث. ويدرس العلماء تأثير هذه الأجرام في المادة
+            والضوء المحيط بها.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="facts">
+      <div class="section-heading">
+        <span>معلومات علمية</span>
+        <h2>حقائق مدهشة عن الفضاء</h2>
+        <p>حقائق تساعدك على التعرّف على الكون بصورة أفضل.</p>
+      </div>
+
+      <div class="facts">
+        <article class="fact">
+          <h3>اتساع الكون</h3>
+          <p>
+            الكون هائل الاتساع، وتوجد فيه أعداد كبيرة من المجرات
+            التي تضم النجوم والأنظمة الكوكبية.
+          </p>
+        </article>
+
+        <article class="fact">
+          <h3>ضوء النجوم</h3>
+          <p>
+            يحتاج الضوء القادم من النجوم البعيدة إلى وقت طويل
+            ليصل إلينا، لذلك نرى بعض الأجرام كما كانت في الماضي.
+          </p>
+        </article>
+
+        <article class="fact">
+          <h3>الجاذبية</h3>
+          <p>
+            الجاذبية هي القوة التي تؤثر في حركة الكواكب والأقمار
+            وتساعد على بقاء الأجرام في مداراتها.
+          </p>
+        </article>
+
+        <article class="fact">
+          <h3>استكشاف المجرات</h3>
+          <p>
+            يستخدم العلماء التلسكوبات لدراسة المجرات والنجوم
+            وتحليل الضوء القادم من أعماق الفضاء.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section id="planets">
+      <div class="section-heading">
+        <span>النظام الشمسي</span>
+        <h2>المجموعة الشمسية</h2>
+        <p>
+          تعرّف على كواكب المجموعة الشمسية، من عطارد إلى نبتون.
+        </p>
+      </div>
+
+      <div class="planet-grid">
+        <article class="planet">
+          <img
+            src="https://images-assets.nasa.gov/image/PIA18033/PIA18033~orig.jpg"
+            alt="كوكب عطارد"
+            loading="lazy"
+          >
+          <h3>عطارد</h3>
+          <p>أقرب الكواكب إلى الشمس، وهو أصغر كواكب المجموعة الشمسية.</p>
+        </article>
+
+        <article class="planet">
+          <img
+            src="https://images-assets.nasa.gov/image/PIA00271/PIA00271~orig.jpg"
+            alt="كوكب الزهرة"
+            loading="lazy"
+          >
+          <h3>كوكب الزهرة</h3>
+          <p>الكوكب الثاني من الشمس، ويتميز بغلاف جوي كثيف وحرارة سطح مرتفعة.</p>
+        </article>
+
+        <article class="planet">
+          <img
+            src="https://images-assets.nasa.gov/image/PIA18033/PIA18033~orig.jpg"
+            alt="كوكب الأرض"
+            loading="lazy"
+          >
+          <h3>كوكب الأرض</h3>
+          <p>موطننا، ويتميز بوجود الماء السائل على سطحه والحياة المعروفة.</p>
+        </article>
+
+        <article class="planet">
+          <img
+            src="https://images-assets.nasa.gov/image/PIA04591/PIA04591~orig.jpg"
+            alt="كوكب المريخ"
+            loading="lazy"
+          >
+          <h3>كوكب المريخ</h3>
+          <p>يُعرف بالكوكب الأحمر بسبب لون سطحه الغني بأكاسيد الحديد.</p>
+        </article>
+
+        <article class="planet">
+          <img
+            src="https://images-assets.nasa.gov/image/PIA02873/PIA02873~orig.jpg"
+            alt="كوكب المشتري"
+            loading="lazy"
+          >
+          <h3>كوكب المشتري</h3>
+          <p>أكبر كواكب المجموعة الشمسية، وهو عملاق غازي.</p>
+        </article>
+
+        <article class="planet">
+          <img
+            src="https://images-assets.nasa.gov/image/PIA01364/PIA01364~orig.jpg"
+            alt="كوكب زحل"
+            loading="lazy"
+          >
+          <h3>كوكب زحل</h3>
+          <p>عملاق غازي مشهور بنظام حلقاته الواسع والبارز.</p>
+        </article>
+
+        <article class="planet">
+          <img
+            src="https://images-assets.nasa.gov/image/PIA18182/PIA18182~orig.jpg"
+            alt="كوكب أورانوس"
+            loading="lazy"
+          >
+          <h3>كوكب أورانوس</h3>
+          <p>عملاق جليدي يتميز بلونه الأزرق المخضر وميله المحوري الكبير.</p>
+        </article>
+
+        <article class="planet">
+          <img
+            src="https://images-assets.nasa.gov/image/PIA01492/PIA01492~orig.jpg"
+            alt="كوكب نبتون"
+            loading="lazy"
+          >
+          <h3>كوكب نبتون</h3>
+          <p>أبعد كواكب المجموعة الشمسية عن الشمس، ويتميز بلونه الأزرق.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="telescope-details">
+      <div class="section-heading">
+        <span>عيوننا على الكون</span>
+        <h2>التلسكوبات الفضائية</h2>
+        <p>كيف نرصد الأجرام السماوية البعيدة؟</p>
+      </div>
+
+      <div class="article">
+        <img
+          src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=900&q=80"
+          alt="استكشاف الفضاء"
+          loading="lazy"
+        >
+        <div>
+          <h3>ما أهمية التلسكوبات الفضائية؟</h3>
+          <p>
+            تدور التلسكوبات الفضائية خارج الغلاف الجوي للأرض،
+            مما يساعدها على رصد الضوء القادم من الأجرام السماوية
+            دون بعض التأثيرات التي يسببها الغلاف الجوي.
+            وتُستخدم الصور والبيانات التي تجمعها لدراسة النجوم
+            والمجرات والكواكب والظواهر الكونية.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <div class="banner">
+      <h2>رحلتك إلى الكون تبدأ هنا</h2>
+      <p>اكتشف المزيد عن النجوم والكواكب وأسرار الفضاء.</p>
+      <a href="#home" class="button">العودة إلى البداية ↑</a>
+    </div>
+  </main>
+
+  <footer>
+    <p>موسوعة الفضاء © <span id="year"></span></p>
+    <p>رحلة معرفية لاستكشاف الكون وأسراره</p>
+  </footer>
+
+  <a href="#home" class="back-top" aria-label="العودة للأعلى">↑</a>
+
+  <script>
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+
+    document.querySelectorAll('a[href^="#"]').forEach(function(link) {
+      link.addEventListener("click", function(event) {
+        const targetId = this.getAttribute("href");
+        const target = document.querySelector(targetId);
+
+        if (target) {
+          event.preventDefault();
+          target.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+          });
+        }
+      });
+    });
+  </script>
 </body>
-</html>
+            </html>
